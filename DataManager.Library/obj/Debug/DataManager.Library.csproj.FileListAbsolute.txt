@@ -1,0 +1,17 @@
+C:\Users\senad\source\repos\DataManager.Library\bin\Debug\DataManager.Library.dll
+C:\Users\senad\source\repos\DataManager.Library\bin\Debug\DataManager.Library.pdb
+C:\Users\senad\source\repos\DataManager.Library\bin\Debug\Dapper.dll
+C:\Users\senad\source\repos\DataManager.Library\bin\Debug\Dapper.xml
+C:\Users\senad\source\repos\DataManager.Library\obj\Debug\DataManager.Library.csprojAssemblyReference.cache
+C:\Users\senad\source\repos\DataManager.Library\obj\Debug\DataManager.Library.csproj.CoreCompileInputs.cache
+C:\Users\senad\source\repos\DataManager.Library\obj\Debug\DataManager.Library.csproj.CopyComplete
+C:\Users\senad\source\repos\DataManager.Library\obj\Debug\DataManager.Library.dll
+C:\Users\senad\source\repos\DataManager.Library\obj\Debug\DataManager.Library.pdb
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\DataManager.Library\bin\Debug\DataManager.Library.dll
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\DataManager.Library\bin\Debug\DataManager.Library.pdb
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\DataManager.Library\bin\Debug\Dapper.dll
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\DataManager.Library\bin\Debug\Dapper.xml
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\DataManager.Library\obj\Debug\DataManager.Library.csproj.AssemblyReference.cache
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\DataManager.Library\obj\Debug\DataManager.Library.csproj.CoreCompileInputs.cache
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\DataManager.Library\obj\Debug\DataManager.Library.dll
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\DataManager.Library\obj\Debug\DataManager.Library.pdb
