@@ -2,7 +2,7 @@
 	  @Id int output,
 	  @CashierId nvarchar(128),
 	  @SaleDate datetime2,
-	  @Subtotal money,
+	  @SubTotal money,
 	  @Tax money,
 	  @Total money
 AS

@@ -11,6 +11,8 @@ using WpfAppDesktopUI.ViewModels;
 using WpfAppDesktopUI.Library.Api;
 using WpfAppDesktopUI.Library.Models;
 using WpfAppDesktopUI.Library.Helpers;
+using AutoMapper;
+using WpfAppDesktopUI.Models;
 
 namespace WpfAppDesktopUI
 {
@@ -25,8 +27,24 @@ namespace WpfAppDesktopUI
             "Password",
             "PasswordChanged");
         }
+        private IMapper ConfigureAutomapper()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ProductModel, ProductDisplayModel>();
+                cfg.CreateMap<CartItemModel, CartItemDisplayModel>();
+            });
+
+            var output = config.CreateMapper();
+            return output;
+        }
+
         protected override void Configure()
         {
+
+            
+            _container.Instance(ConfigureAutomapper());
+
             _container.Instance(_container)
                 .PerRequest<IProductEndpoint, ProductEndpoint>()
                 .PerRequest<ISaleEndpoint, SaleEndpoint>();
