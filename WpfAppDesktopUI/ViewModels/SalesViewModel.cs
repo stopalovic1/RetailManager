@@ -3,9 +3,12 @@ using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using WpfAppDesktopUI.EventModels;
 using WpfAppDesktopUI.Library.Api;
 using WpfAppDesktopUI.Library.Helpers;
 using WpfAppDesktopUI.Library.Models;
@@ -19,18 +22,48 @@ namespace WpfAppDesktopUI.ViewModels
         IConfigHelper _confgiHelper;
         ISaleEndpoint _saleEndpoint;
         IMapper _mapper;
+        private readonly StatusInfoViewModel _status;
+        private readonly IWindowManager _window;
+        private readonly IEventAggregator _events;
+
         public SalesViewModel(IProductEndpoint productEndpoint, IConfigHelper configHelper,
-            ISaleEndpoint saleEndpoint, IMapper mapper)
+            ISaleEndpoint saleEndpoint, IMapper mapper, StatusInfoViewModel status, IWindowManager window,IEventAggregator events)
         {
             _productEndpoint = productEndpoint;
             _confgiHelper = configHelper;
             _saleEndpoint = saleEndpoint;
             _mapper = mapper;
+            _status = status;
+            _window = window;
+            _events = events;
         }
         protected override async void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
-            await LoadProducts();
+            try
+            {
+                await LoadProducts();
+            }
+            catch (Exception ex)
+            {
+                dynamic settings = new ExpandoObject();
+                settings.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                settings.ResizeMode = ResizeMode.NoResize;
+                settings.Title = "System error";
+
+                if (ex.Message == "Unauthorized")
+                {
+                    _status.UpdateMessage("Unathorized", "You do not have rights to interact with the Sales Form.");
+                    _window.ShowDialog(_status, null, settings);
+                }
+                else
+                {
+                    _status.UpdateMessage("Fatal Execption", ex.Message);
+                    _window.ShowDialog(_status, null, settings);
+                }
+                await _events.PublishOnUIThreadAsync(new UnauthorizedEvent());
+
+            }
         }
 
         private async Task LoadProducts()

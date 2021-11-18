@@ -11,17 +11,19 @@ using WpfAppDesktopUI.Library.Models;
 
 namespace WpfAppDesktopUI.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>
+    public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>, IHandle<UnauthorizedEvent>
     {
 
         private IEventAggregator _events;
         private SalesViewModel _salesVM;
         private ILoggedInUserModel _user;
         private IAPIHelper _apiHelper;
-        public ShellViewModel(IEventAggregator events, SalesViewModel salesVM, ILoggedInUserModel user,IAPIHelper apiHelper)
+        private LoginViewModel _loginVM;
+        public ShellViewModel(IEventAggregator events, SalesViewModel salesVM, ILoggedInUserModel user, IAPIHelper apiHelper, LoginViewModel loginVM)
         {
             _events = events;
             _salesVM = salesVM;
+            _loginVM = loginVM;
             _user = user;
             _apiHelper = apiHelper;
             _events.Subscribe(this);
@@ -64,6 +66,9 @@ namespace WpfAppDesktopUI.ViewModels
             NotifyOfPropertyChange(() => IsLoggedIn);
         }
 
-
+        public void Handle(UnauthorizedEvent message)
+        {
+            ActivateItem(_loginVM);
+        }
     }
 }
