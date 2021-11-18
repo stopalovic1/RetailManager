@@ -27,13 +27,12 @@ namespace DataManager.Library.Internal.DataAccess
             }
         }
 
-        public int SaveData<T>(string storedProcedure, T parameters, string connectionStringName)
+        public void SaveData<T>(string storedProcedure, T parameters, string connectionStringName)
         {
             string connectionString = GetConnectionString(connectionStringName);
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                var lastId = connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
-                return Convert.ToInt32(lastId);
+                connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -47,6 +46,7 @@ namespace DataManager.Library.Internal.DataAccess
             _connection = new SqlConnection(connectionString);
             _connection.Open();
             _transaction = _connection.BeginTransaction();
+            isClosed = false;
         }
 
         public void SaveDataInTransaction<T>(string storedProcedure, T parameters)
@@ -54,6 +54,10 @@ namespace DataManager.Library.Internal.DataAccess
             _connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure, transaction: _transaction);
 
         }
+
+        private bool isClosed = false;
+
+
         public List<T> LoadDataInTransaction<T, U>(string storedProcedure, U parameters)
         {
             List<T> rows = _connection.Query<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure, transaction: _transaction).ToList();
@@ -65,17 +69,31 @@ namespace DataManager.Library.Internal.DataAccess
         {
             _transaction?.Commit();
             _connection.Close();
+            isClosed = true;
         }
 
         public void RollbackTransaction()
         {
             _transaction?.Rollback();
             _connection.Close();
+            isClosed = true;
         }
 
         public void Dispose()
         {
-            CommitTransaction();
+            if (isClosed == false)
+            {
+
+                try
+                {
+                    CommitTransaction();
+                }
+                catch
+                {
+                }
+            }
+            _transaction = null;
+            _connection = null;
         }
     }
 }

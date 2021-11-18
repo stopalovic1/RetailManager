@@ -10,15 +10,22 @@ using System.Web.Http;
 
 namespace WebApplication4.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class SaleController : ApiController
     {
-     
+
         public void Post(SaleModel sale)
         {
             SaleData data = new SaleData();
             string userId = RequestContext.Principal.Identity.GetUserId();
             data.SaveSale(sale, userId);
+        }
+
+        [Route("GetSalesReport")]
+        public List<SaleReportModel> GetSaleReports()
+        {
+            SaleData data = new SaleData();
+            return data.GetSaleReport();
         }
     }
 }

@@ -825,6 +825,160 @@
 			<AttachedAnnotation Disambiguator="19" />
 			<AttachedAnnotation Disambiguator="18" />
 		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[spInventory_GetAll]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+begin
+set nocount on;
+
+	SELECT [ProductId], [Quantity], [PurchasePrice], [PurchaseDate]
+	from dbo.Inventory;
+end]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Inventory]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Inventory].[ProductId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Inventory].[Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Inventory].[PurchasePrice]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Inventory].[PurchaseDate]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="166" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spInventory_GetAll]&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[spInventory_Insert]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+begin
+	set nocount on; 
+	insert into dbo.Inventory(ProductId,Quantity,PurchasePrice,PurchaseDate)
+	values(@ProductId,@Quantity,@PurchasePrice,@PurchaseDate);
+end]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Inventory]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Inventory].[ProductId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Inventory].[Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Inventory].[PurchasePrice]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Inventory].[PurchaseDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[spInventory_Insert].[@ProductId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[spInventory_Insert].[@Quantity]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[spInventory_Insert].[@PurchasePrice]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[spInventory_Insert].[@PurchaseDate]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[spInventory_Insert].[@ProductId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[spInventory_Insert].[@Quantity]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[spInventory_Insert].[@PurchasePrice]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[money]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[spInventory_Insert].[@PurchaseDate]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Scale" Value="7" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime2]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="360" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spInventory_Insert]&#xD;&#xA;&#x9;--[ProductId], [Quantity], [PurchasePrice], [PurchaseDate]&#xD;&#xA;&#x9;@ProductId int,&#xD;&#xA;&#x9;@Quantity int,&#xD;&#xA;&#x9;@PurchasePrice money,&#xD;&#xA;&#x9;@PurchaseDate datetime2&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[spProduct_GetAll]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
@@ -948,8 +1102,8 @@ end]]></Value>
 begin
 	set nocount on;
 	insert into dbo.Sale(CashierId,SaleDate,SubTotal,Tax,Total)
-	OUTPUT INSERTED.[Id]
 	values(@CashierId,@SaleDate,@SubTotal,@Tax,@Total);
+	select @Id = SCOPE_IDENTITY();
 end]]></Value>
 			</Property>
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -988,7 +1142,7 @@ end]]></Value>
 					<References Name="[dbo].[spSale_Insert].[@Total]" />
 				</Entry>
 				<Entry>
-					<References Name="[dbo].[Sale].[Id]" />
+					<References Name="[dbo].[spSale_Insert].[@Id]" />
 				</Entry>
 			</Relationship>
 			<Relationship Name="Parameters">
@@ -1092,7 +1246,7 @@ end]]></Value>
 				</Entry>
 			</Relationship>
 			<Annotation Type="SysCommentsObjectAnnotation">
-				<Property Name="Length" Value="340" />
+				<Property Name="Length" Value="350" />
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spSale_Insert]&#xD;&#xA;&#x9;  @Id int output,&#xD;&#xA;&#x9;  @CashierId nvarchar(128),&#xD;&#xA;&#x9;  @SaleDate datetime2,&#xD;&#xA;&#x9;  @SubTotal money,&#xD;&#xA;&#x9;  @Tax money,&#xD;&#xA;&#x9;  @Total money&#xD;&#xA;AS" />
@@ -1173,6 +1327,63 @@ end]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spSale_Lookup]&#xD;&#xA;&#x9;@CashierId nvarchar(128),&#xD;&#xA;&#x9;@SaleDate datetime2&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[spSale_SaleReport]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+begin
+	SELECT  [s].[SaleDate], [s].[SubTotal], [s].[Tax], [s].[Total], [u].[FirstName], [u].[LastName], [u].[EmailAdress]
+	from dbo.Sale s
+	inner join dbo.[User] u on s.CashierId=u.Id;
+end]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Sale]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[User]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Sale].[CashierId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[User].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Sale].[SaleDate]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Sale].[SubTotal]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Sale].[Tax]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Sale].[Total]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[User].[FirstName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[User].[LastName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[User].[EmailAdress]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="243" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spSale_SaleReport]&#xD;&#xA;&#x9;&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[spSaleDetail_Insert]">
