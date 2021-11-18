@@ -107,3 +107,4 @@ C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI
 C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\obj\Debug\WpfAppDesktopUI.pdb
 C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\bin\Debug\AutoMapper.dll
 C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\bin\Debug\AutoMapper.xml
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\obj\Debug\WpfAppDesktopUI.csproj.CopyComplete

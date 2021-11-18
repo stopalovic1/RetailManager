@@ -51,6 +51,19 @@ namespace WpfAppDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Products);
             }
         }
+
+
+        private async Task ResetSaleViewModel()
+        {
+            Cart = new BindingList<CartItemDisplayModel>();
+            await LoadProducts();
+            NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
+
+        }
+
         private ProductDisplayModel _selectedProduct;
 
         public ProductDisplayModel SelectedProduct
@@ -229,6 +242,7 @@ namespace WpfAppDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Tax);
                 NotifyOfPropertyChange(() => Total);
                 NotifyOfPropertyChange(() => CanCheckOut);
+                NotifyOfPropertyChange(() => CanAddToCart);
             }
         }
 
@@ -257,6 +271,7 @@ namespace WpfAppDesktopUI.ViewModels
                 });
             }
             await _saleEndpoint.PostSale(sale);
+            await ResetSaleViewModel();
         }
     }
 }
