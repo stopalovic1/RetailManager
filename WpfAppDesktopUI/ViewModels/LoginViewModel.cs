@@ -12,8 +12,6 @@ namespace WpfAppDesktopUI.ViewModels
 
     public class LoginViewModel : Screen
     {
-
-
         private IAPIHelper _apiHelper;
         private IEventAggregator _events;
 
@@ -61,7 +59,6 @@ namespace WpfAppDesktopUI.ViewModels
         }
 
         private string _errorMessage;
-
         public string ErrorMessage
         {
             get { return _errorMessage; }

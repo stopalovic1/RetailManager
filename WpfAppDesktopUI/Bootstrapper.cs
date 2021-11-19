@@ -33,6 +33,7 @@ namespace WpfAppDesktopUI
             {
                 cfg.CreateMap<ProductModel, ProductDisplayModel>();
                 cfg.CreateMap<CartItemModel, CartItemDisplayModel>();
+                //cfg.CreateMap<>
             });
 
             var output = config.CreateMapper();
@@ -47,7 +48,8 @@ namespace WpfAppDesktopUI
 
             _container.Instance(_container)
                 .PerRequest<IProductEndpoint, ProductEndpoint>()
-                .PerRequest<ISaleEndpoint, SaleEndpoint>();
+                .PerRequest<ISaleEndpoint, SaleEndpoint>()
+                .PerRequest<IUserEndpoint, UserEndpoint>();
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
@@ -55,7 +57,7 @@ namespace WpfAppDesktopUI
                 .Singleton<ILoggedInUserModel, LoggedInUserModel>()
                 .Singleton<IAPIHelper, APIHelper>()
                 .Singleton<IConfigHelper, ConfigHelper>();
-
+                
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
                 .Where(type => type.Name.EndsWith("ViewModel"))

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\App.xaml
-4967613433
+5-108397928
 
-192110509190
+21328742741
 1281330384267
-Views\LoginView.xaml;Views\SalesView.xaml;Views\ShellView.xaml;Views\StatusInfoView.xaml;
+Views\LoginView.xaml;Views\SalesView.xaml;Views\ShellView.xaml;Views\StatusInfoView.xaml;Views\UserDisplayView.xaml;
 
-False
+True
 

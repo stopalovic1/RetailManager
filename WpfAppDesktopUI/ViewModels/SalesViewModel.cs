@@ -85,7 +85,6 @@ namespace WpfAppDesktopUI.ViewModels
             }
         }
 
-
         private async Task ResetSaleViewModel()
         {
             Cart = new BindingList<CartItemDisplayModel>();
@@ -109,8 +108,6 @@ namespace WpfAppDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => CanAddToCart);
             }
         }
-
-
 
         private BindingList<CartItemDisplayModel> _cart = new BindingList<CartItemDisplayModel>();
 
@@ -136,8 +133,6 @@ namespace WpfAppDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => CanRemoveFromCart);
             }
         }
-
-
 
         private int _itemQuantity = 1;
 
@@ -177,10 +172,7 @@ namespace WpfAppDesktopUI.ViewModels
             taxAmount = Cart
                 .Where(x => x.Product.IsTaxable)
                 .Sum(x => x.Product.RetailPrice * x.QuantityInCart * taxRate);
-            /*foreach (var item in Cart)
-            {
-                taxAmount += item.Product.RetailPrice * item.QuantityInCart * taxRate;
-            }*/
+     
             return taxAmount;
         }
         public string Tax
@@ -199,7 +191,6 @@ namespace WpfAppDesktopUI.ViewModels
                 return total.ToString("C");
             }
         }
-
         public bool CanAddToCart
         {
             get
@@ -213,7 +204,6 @@ namespace WpfAppDesktopUI.ViewModels
                 return output;
             }
         }
-
         public void AddToCart()
         {
             CartItemDisplayModel existingItem = Cart.FirstOrDefault(x => x.Product == SelectedProduct);
@@ -241,7 +231,6 @@ namespace WpfAppDesktopUI.ViewModels
             NotifyOfPropertyChange(() => Products);
             NotifyOfPropertyChange(() => CanCheckOut);
         }
-
         public bool CanRemoveFromCart
         {
             get
@@ -278,7 +267,6 @@ namespace WpfAppDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => CanAddToCart);
             }
         }
-
         public bool CanCheckOut
         {
             get

@@ -109,3 +109,5 @@ C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI
 C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\bin\Debug\AutoMapper.xml
 C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\obj\Debug\Views\StatusInfoView.g.cs
 C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\obj\Debug\Views\StatusInfoView.baml
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\obj\Debug\Views\UserDisplayView.g.cs
+C:\Users\senad\Desktop\RetailManager-master\RetailManager-master\WpfAppDesktopUI\obj\Debug\Views\UserDisplayView.baml

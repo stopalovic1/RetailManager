@@ -19,12 +19,15 @@ namespace WpfAppDesktopUI.ViewModels
         private ILoggedInUserModel _user;
         private IAPIHelper _apiHelper;
         private LoginViewModel _loginVM;
-        public ShellViewModel(IEventAggregator events, SalesViewModel salesVM, ILoggedInUserModel user, IAPIHelper apiHelper, LoginViewModel loginVM)
+        private UserDisplayViewModel _userDisplayVM;
+        public ShellViewModel(IEventAggregator events, SalesViewModel salesVM, ILoggedInUserModel user,
+            IAPIHelper apiHelper, LoginViewModel loginVM, UserDisplayViewModel userDisplayVM)
         {
             _events = events;
             _salesVM = salesVM;
             _loginVM = loginVM;
             _user = user;
+            _userDisplayVM = userDisplayVM;
             _apiHelper = apiHelper;
             _events.Subscribe(this);
             ActivateItem(IoC.Get<LoginViewModel>());
@@ -50,8 +53,10 @@ namespace WpfAppDesktopUI.ViewModels
             TryClose();
         }
 
-
-
+        public void UserManagement()
+        {
+            ActivateItem(_userDisplayVM);
+        }
         public void LogOut()
         {
             _user.ResetUserModel();
