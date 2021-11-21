@@ -31,6 +31,112 @@ namespace WpfAppDesktopUI.ViewModels
             }
         }
 
+        private List<string> _allRoles;
+
+        public List<string> AllRoles
+        {
+            get { return _allRoles; }
+            set { _allRoles = value; }
+        }
+
+        private string _selectedUserRole;
+
+        public string SelectedUserRole
+        {
+            get { return _selectedUserRole; }
+            set
+            {
+                _selectedUserRole = value;
+                NotifyOfPropertyChange(() => SelectedUserRole);
+            }
+        }
+
+        private string _selectedRoleToAdd;
+
+        public string SelectedRoleToAdd
+        {
+            get { return _selectedRoleToAdd; }
+            set
+            {
+                _selectedRoleToAdd = value;
+                NotifyOfPropertyChange(() => SelectedRoleToAdd);
+            }
+
+        }
+
+
+        private string _selectedRoleToRemove;
+
+        public string SelectedRoleToRemove
+        {
+            get { return _selectedRoleToRemove; }
+            set
+            {
+                _selectedRoleToRemove = value;
+                NotifyOfPropertyChange(() => SelectedRoleToRemove);
+            }
+
+        }
+
+        private UserModel _selectedUser;
+
+        public UserModel SelectedUser
+        {
+            get { return _selectedUser; }
+            set
+            {
+                _selectedUser = value;
+                SelectedUserRoles.Clear();
+                AvailableRoles.Clear();
+                if (value != null)
+                {
+                    SelectedUserName = value.Email;
+                    SelectedUserRoles = new BindingList<string>(value.Roles.Select(x => x.Value).ToList());
+                }
+                GetAvailableRoles();
+                NotifyOfPropertyChange(() => SelectedUser);
+
+
+            }
+        }
+
+        private string _selectedUserName;
+
+        public string SelectedUserName
+        {
+            get { return _selectedUserName; }
+            set
+            {
+                _selectedUserName = value;
+                NotifyOfPropertyChange(() => SelectedUserName);
+            }
+        }
+
+        private BindingList<string> _selectedUserRoles = new BindingList<string>();
+
+        public BindingList<string> SelectedUserRoles
+        {
+            get { return _selectedUserRoles; }
+            set
+            {
+                _selectedUserRoles = value;
+                NotifyOfPropertyChange(() => SelectedUserRoles);
+            }
+        }
+
+        private BindingList<string> _availableRoles = new BindingList<string>();
+
+        public BindingList<string> AvailableRoles
+        {
+            get { return _availableRoles; }
+            set
+            {
+                _availableRoles = value;
+                NotifyOfPropertyChange(() => AvailableRoles);
+            }
+        }
+
+
         public UserDisplayViewModel(StatusInfoViewModel status, IWindowManager window, IEventAggregator events, IUserEndpoint userEndpoint)
         {
             _status = status;
@@ -45,6 +151,7 @@ namespace WpfAppDesktopUI.ViewModels
             try
             {
                 await LoadUsers();
+                await LoadRoles();
             }
             catch (Exception ex)
             {
@@ -73,5 +180,34 @@ namespace WpfAppDesktopUI.ViewModels
             Users = new BindingList<UserModel>(userList);
         }
 
+        private async Task LoadRoles()
+        {
+            var roles = await _userEndpoint.GetAllRoles();
+            AllRoles = roles.Select(x => x.Value).ToList();
+        }
+
+        private void GetAvailableRoles()
+        {
+            foreach (var role in AllRoles)
+            {
+                if (SelectedUserRoles.IndexOf(role) < 0)
+                {
+                    AvailableRoles.Add(role);
+                }
+            }
+        }
+
+        public async Task AddSelectedRole()
+        {
+            await _userEndpoint.AddUserToRole(SelectedUser.Id, SelectedRoleToAdd);
+            SelectedUserRoles.Add(SelectedRoleToAdd);
+            AvailableRoles.Remove(SelectedRoleToAdd);
+        }
+        public async Task RemoveSelectedRole()
+        {
+            await _userEndpoint.RemoveUserFromRole(SelectedUser.Id, SelectedRoleToRemove);
+            AvailableRoles.Add(SelectedRoleToRemove);
+            SelectedUserRoles.Remove(SelectedRoleToRemove);
+        }
     }
 }
