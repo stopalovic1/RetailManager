@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-DataManagerApi-B308690B-455C-43A9-B8C2-76E398D63CCD</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.20" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataManager.Library\DataManager.Library.csproj" />
+  </ItemGroup>
+
+</Project>
