@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,25 +23,28 @@ namespace DataManagerApi.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IConfiguration _config;
 
-        public UserController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public UserController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IConfiguration config)
         {
             _context = context;
             _userManager = userManager;
+            _config = config;
         }
 
         [HttpGet]
         public UserModel GetById()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);     //RequestContext.Principal.Identity.GetUserId();
-            UserData data = new UserData();
+            UserData data = new UserData(_config);
             return data.GetUserById(userId).First();
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("api/User/Admin/GetAllUsers")]
-        public List<ApplicationUserModel> GetAllUsers()
+        [Route("Admin/GetAllUsers")]
+        public IActionResult GetAllUsers()
         {
             List<ApplicationUserModel> output = new List<ApplicationUserModel>();
 
@@ -69,12 +73,12 @@ namespace DataManagerApi.Controllers
                 output.Add(u);
             }
 
-            return output;
+            return Ok(output);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        [Route("api/User/Admin/GetAllRoles")]
+        [Route("Admin/GetAllRoles")]
         public Dictionary<string, string> GetAllRoles()
         {
             var roles = _context.Roles.ToDictionary(x => x.Id, x => x.Name);
@@ -84,7 +88,7 @@ namespace DataManagerApi.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Route("api/User/Admin/AddRole")]
+        [Route("Admin/AddRole")]
         public async Task AddARole(UserRolePairModel pairing)
         {
             var user = await _userManager.FindByIdAsync(pairing.UserId);
@@ -93,11 +97,49 @@ namespace DataManagerApi.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        [Route("api/User/Admin/RemoveRole")]
+        [Route("Admin/RemoveRole")]
         public async Task RemoveARole(UserRolePairModel pairing)
         {
             var user = await _userManager.FindByIdAsync(pairing.UserId);
             await _userManager.RemoveFromRoleAsync(user, pairing.RoleName);
         }
+
+
+
+        /// <response code="201">Returns the newly created item</response>
+        /// <response code="400">Error neki</response> 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Register")]
+        public async Task<IActionResult> Register(UserRegisterModel model)
+        {
+            var result = _userManager.FindByEmailAsync(model.Username);
+            if (result != null)
+            {
+                return BadRequest("Korisnik sa tim emailom vec postoji");
+            }
+
+            var user = new IdentityUser
+            {
+                UserName = model.Username,
+                Email = model.Email
+            };
+
+
+            var create = await _userManager.CreateAsync(user, model.Password);
+            //var role=_roleManager.
+            var role = new IdentityRole();
+            if(create.Succeeded)
+            {
+                return Ok("Uspjesno registrovan");
+            }
+            else
+            {
+                return BadRequest(create.Errors);
+            }
+        }
+
     }
+
+
 }

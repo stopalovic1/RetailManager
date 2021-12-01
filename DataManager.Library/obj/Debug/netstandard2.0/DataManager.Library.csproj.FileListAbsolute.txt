@@ -1,8 +1,8 @@
 C:\Users\senad\Desktop\RetailManager\RetailManager\DataManager.Library\bin\Debug\netstandard2.0\DataManager.Library.deps.json
 C:\Users\senad\Desktop\RetailManager\RetailManager\DataManager.Library\bin\Debug\netstandard2.0\DataManager.Library.dll
 C:\Users\senad\Desktop\RetailManager\RetailManager\DataManager.Library\bin\Debug\netstandard2.0\DataManager.Library.pdb
+C:\Users\senad\Desktop\RetailManager\RetailManager\DataManager.Library\obj\Debug\netstandard2.0\DataManager.Library.csproj.AssemblyReference.cache
 C:\Users\senad\Desktop\RetailManager\RetailManager\DataManager.Library\obj\Debug\netstandard2.0\DataManager.Library.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\senad\Desktop\RetailManager\RetailManager\DataManager.Library\obj\Debug\netstandard2.0\DataManager.Library.csproj.CoreCompileInputs.cache
 C:\Users\senad\Desktop\RetailManager\RetailManager\DataManager.Library\obj\Debug\netstandard2.0\DataManager.Library.dll
 C:\Users\senad\Desktop\RetailManager\RetailManager\DataManager.Library\obj\Debug\netstandard2.0\DataManager.Library.pdb
-C:\Users\senad\Desktop\RetailManager\RetailManager\DataManager.Library\obj\Debug\netstandard2.0\DataManager.Library.csproj.AssemblyReference.cache
