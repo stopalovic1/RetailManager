@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Caliburn.Micro;
 using WpfAppDesktopUI.EventModels;
 using WpfAppDesktopUI.Library.Api;
-
+using System.Threading;
 namespace WpfAppDesktopUI.ViewModels
 {
 
@@ -85,7 +85,7 @@ namespace WpfAppDesktopUI.ViewModels
                 ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
                 await _apiHelper.GetLoggedInUserInfo(result.access_token);
-                await _events.PublishOnUIThreadAsync(new LogOnEvent());
+                await _events.PublishOnUIThreadAsync(new LogOnEvent(),new CancellationToken());
 
             }
             catch (Exception e)

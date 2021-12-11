@@ -21,7 +21,7 @@ namespace WpfAppDesktopUI.ViewModels
         }
         public void Close()
         {
-            TryClose();
+            TryCloseAsync();
         }
     }
 }

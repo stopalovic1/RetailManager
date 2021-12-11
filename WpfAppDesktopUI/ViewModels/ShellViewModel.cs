@@ -29,8 +29,8 @@ namespace WpfAppDesktopUI.ViewModels
             _user = user;
             _userDisplayVM = userDisplayVM;
             _apiHelper = apiHelper;
-            _events.Subscribe(this);
-            ActivateItem(IoC.Get<LoginViewModel>());
+            _events.SubscribeOnPublishedThread(this);
+            ActivateItemAsync(IoC.Get<LoginViewModel>(),new CancellationToken());
         }
 
 
@@ -50,30 +50,30 @@ namespace WpfAppDesktopUI.ViewModels
 
         public void ExitApplication()
         {
-            TryClose();
+            TryCloseAsync();
         }
 
-        public void UserManagement()
+        public async Task UserManagement()
         {
-            ActivateItem(_userDisplayVM);
+            await ActivateItemAsync(_userDisplayVM,new CancellationToken());
         }
-        public void LogOut()
+        public async Task LogOut()
         {
             _user.ResetUserModel();
             _apiHelper.LogOffUser();
-            ActivateItem(IoC.Get<LoginViewModel>());
+            await ActivateItemAsync(IoC.Get<LoginViewModel>(), new CancellationToken());
             NotifyOfPropertyChange(() => IsLoggedIn);
         }
 
-        public void Handle(LogOnEvent message)
+        public async Task HandleAsync(LogOnEvent message, CancellationToken cancellationToken)
         {
-            ActivateItem(_salesVM);
+            await ActivateItemAsync(_salesVM, cancellationToken);
             NotifyOfPropertyChange(() => IsLoggedIn);
         }
 
-        public void Handle(UnauthorizedEvent message)
+        public async Task HandleAsync(UnauthorizedEvent message, CancellationToken cancellationToken)
         {
-            ActivateItem(_loginVM);
+            await ActivateItemAsync(_loginVM, cancellationToken);
         }
     }
 }

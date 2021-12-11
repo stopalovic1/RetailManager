@@ -54,12 +54,12 @@ namespace WpfAppDesktopUI.ViewModels
                 if (ex.Message == "Unauthorized")
                 {
                     _status.UpdateMessage("Unathorized", "You do not have rights to interact with the Sales Form.");
-                    _window.ShowDialog(_status, null, settings);
+                   await  _window.ShowDialogAsync(_status, null, settings);
                 }
                 else
                 {
                     _status.UpdateMessage("Fatal Execption", ex.Message);
-                    _window.ShowDialog(_status, null, settings);
+                    await _window.ShowDialogAsync(_status, null, settings);
                 }
                 await _events.PublishOnUIThreadAsync(new UnauthorizedEvent());
 

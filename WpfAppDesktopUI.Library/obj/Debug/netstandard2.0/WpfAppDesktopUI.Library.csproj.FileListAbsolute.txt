@@ -1,0 +1,10 @@
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\bin\Debug\netstandard2.0\WpfAppDesktopUI.Library.deps.json
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\bin\Debug\netstandard2.0\WpfAppDesktopUI.Library.dll
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\bin\Debug\netstandard2.0\WpfAppDesktopUI.Library.pdb
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\obj\Debug\netstandard2.0\WpfAppDesktopUI.Library.csproj.AssemblyReference.cache
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\obj\Debug\netstandard2.0\WpfAppDesktopUI.Library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\obj\Debug\netstandard2.0\WpfAppDesktopUI.Library.AssemblyInfoInputs.cache
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\obj\Debug\netstandard2.0\WpfAppDesktopUI.Library.AssemblyInfo.cs
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\obj\Debug\netstandard2.0\WpfAppDesktopUI.Library.csproj.CoreCompileInputs.cache
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\obj\Debug\netstandard2.0\WpfAppDesktopUI.Library.dll
+C:\Users\senad\Desktop\RetailManager\RetailManager\WpfAppDesktopUI.Library\obj\Debug\netstandard2.0\WpfAppDesktopUI.Library.pdb
